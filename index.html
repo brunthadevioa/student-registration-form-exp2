@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration Form</title>
+</head>
+<body>
+
+<form id="studentForm" onsubmit="return validateForm()">
+    <table border="1" align="center" cellpadding="12">
+
+        <tr><br>
+            <th colspan="2" align="center">
+                Student Registration Form
+            </th>
+        </tr>
+
+        <tr>
+            <th>Full Name</th>
+            <td><input type="text" id="name" placeholder="Enter full name" size="35"></td>
+        </tr>
+        <tr>
+            <th>Roll No</th>
+            <td><input type="text" id="roll" placeholder="Enter roll number" size="35"></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td><input type="text" id="email" placeholder="Enter email" size="35"></td>
+        </tr>
+        <tr>
+            <th>Phone Number</th>
+            <td><input type="text" id="phone" placeholder="Enter 10-digit phone number" size="35"></td>
+        </tr>
+        <tr>
+            <th>Age</th>
+            <td><input type="number" id="age" placeholder="Enter age" size="35"></td>
+        </tr>
+        <tr>
+            <th>Section</th>
+            <td>
+                <input type="radio" name="section" value="A"> A
+                <input type="radio" name="section" value="B"> B
+                <input type="radio" name="section" value="C"> C
+            </td>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td>
+                <input type="radio" name="gender" value="Male"> Male
+                <input type="radio" name="gender" value="Female"> Female
+                <input type="radio" name="gender" value="Other"> Other
+            </td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td><input type="text" id="address" placeholder="Enter address" size="35"></td>
+        </tr>
+        <tr>
+            <th>Date of Birth</th>
+            <td><input type="date" id="dob"></td>
+        </tr>
+        <tr>
+            <th>Department / Major</th>
+            <td>
+                <select id="major">
+                    <option value="">Select</option>
+                    <option>Computer Science</option>
+                    <option>Engineering</option>
+                    <option>Biology</option>
+                    <option>Business</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Languages Known</th>
+            <td>
+                <input type="checkbox" name="lang"> Tamil
+                <input type="checkbox" name="lang"> English
+                <input type="checkbox" name="lang"> Hindi
+                <input type="checkbox" name="lang"> French
+            </td>
+        </tr>
+        <tr>
+            <th>Password</th>
+            <td><input type="password" id="password" placeholder="Enter password" size="35"></td>
+        </tr>
+        <tr>
+            <th>Confirm Password</th>
+            <td><input type="password" id="confirmPassword" placeholder="Confirm password" size="35"></td>
+        </tr>
+        <tr>
+            <th colspan="2" align="center">
+                <input type="submit" value="Register">
+            </th>
+        </tr>
+    </table>
+</form>
+
+<script>
+function validateForm() {
+    let name = document.getElementById("name").value.trim();
+    let roll = document.getElementById("roll").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let age = document.getElementById("age").value.trim();
+    let address = document.getElementById("address").value.trim();
+    let dob = document.getElementById("dob").value;
+    let major = document.getElementById("major").value;
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
+
+    let section = document.querySelector('input[name="section"]:checked');
+    let gender = document.querySelector('input[name="gender"]:checked');
+
+    if(name === "") { alert("Enter full name"); return false; }
+    if(roll === "") { alert("Enter roll number"); return false; }
+
+    let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if(!emailPattern.test(email)) { alert("Enter valid email"); return false; }
+
+    let phonePattern = /^\d{10}$/;
+    if(!phonePattern.test(phone)) { alert("Enter valid phone number"); return false; }
+
+    if(age === "" || age <= 0) { alert("Enter valid age"); return false; }
+    if(!section) { alert("Select section"); return false; }
+    if(!gender) { alert("Select gender"); return false; }
+    if(address === "") { alert("Enter address"); return false; }
+    if(dob === "") { alert("Select DOB"); return false; }
+    if(major === "") { alert("Select department"); return false; }
+    if(password.length < 6) { alert("Password must be at least 6 characters"); return false; }
+    if(password !== confirmPassword) { alert("Passwords do not match"); return false; }
+
+    alert("Form submitted successfully!");
+    return true;
+}
+</script>
+
+</body>
+</html>
+
